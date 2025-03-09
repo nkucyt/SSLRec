@@ -111,12 +111,13 @@ class AdaGCL_wo_gd(BaseModel):
 
 		out1_u, out1_i = self.forward(generated_adj)
 		out1 = t.concat([out1_u, out1_i])
-		out2 = self.forward_()
+		#out2 = self.forward_()
 
-		loss = self.loss_graphcl(out1, out2, ancs, poss).mean() * self.cl_weight
+		loss = self.loss_graphcl(out1, out1, ancs, poss).mean() * self.cl_weight
+		#loss = self.loss_graphcl(out1, out2, ancs, poss).mean() * self.cl_weight
 		losses = {'cl_loss': loss}
 
-		return loss, losses, out1, out2
+		return loss, losses, out1, out1
 
 	def cal_loss_ib(self, batch_data, generated_adj, out1_old, out2_old):
 		self.is_training = True
@@ -125,9 +126,10 @@ class AdaGCL_wo_gd(BaseModel):
 
 		out1_u, out1_i = self.forward(generated_adj)
 		out1 = t.concat([out1_u, out1_i])
-		out2 = self.forward_()
-
-		loss_ib = self.loss_graphcl(out1, out1_old.detach(), ancs, poss) + self.loss_graphcl(out2, out2_old.detach(), ancs, poss)
+		#out2 = self.forward_()
+		
+		loss_ib = self.loss_graphcl(out1, out1_old.detach(), ancs, poss)
+		#loss_ib = self.loss_graphcl(out1, out1_old.detach(), ancs, poss) + self.loss_graphcl(out2, out2_old.detach(), ancs, poss)
 		loss = loss_ib.mean() * self.ib_weight
 		losses = {'ib_loss': loss}
 
