@@ -1298,7 +1298,7 @@ class AdaGCLwodpTrainer(Trainer):
     #去掉vgae模块
     def __init__(self, data_handler, logger):
         from models.general_cf.adagcl_wo_task import VGAE, DenoiseNet
-        super(AdaGCLwotaskTrainer, self).__init__(data_handler, logger)
+        super(AdaGCLwodpTrainer, self).__init__(data_handler, logger)
         #self.generator_1 = VGAE().cuda()
         self.generator_2 = DenoiseNet().cuda()
 
