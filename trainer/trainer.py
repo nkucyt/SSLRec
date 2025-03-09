@@ -1294,10 +1294,6 @@ class AdaGCLwogdTrainer(Trainer):
         else:
             self.logger.log_loss(epoch_idx, loss_log_dict, save_to_log=False)
 
-class AdaGCLwodpTrainer(Trainer): 
-    #去掉vgae模块
-    
-
 
 class AdaGCLwotaskTrainer(Trainer):
     #去掉优化目标函数
